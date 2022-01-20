@@ -157,7 +157,7 @@ public:
 			for (int y = 0; y < ScreenHeight(); y++)
 				Draw(x, y, olc::Pixel(255*abs(V[x][y])/maxV, 255*abs(U[x][y])/maxU, 255*abs(P[x][y])/maxP));
 
-		if(GetKey(olc::Key::ENTER).bPressed) std::cout << "maxU: " << maxU << ", maxV: " << maxV << ", maxP: " << maxP << "\n";
+		if(GetKey(olc::Key::ENTER).bHeld) std::cout << "maxU: " << maxU << ", maxV: " << maxV << ", maxP: " << maxP << "\n";
 		updateVel();
 		updateP();
 		return true;
