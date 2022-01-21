@@ -145,15 +145,23 @@ public:
 				envir[x][y] = 0;
 			}
 		}
-		for(int x = 100; x < size - 500; x++)
-			for(int y = 100; y < size - 500; y++)
-				P[x][y] = rand() % 200;
+
+		//############### set/draw the initial environment and such here
+		for(int x = 300; x < 350; x++)
+			for(int y = 350; y < 400; y++)
+				P[x][y] = /*rand() %*/ 200;
 		for(int x = 5; x < size-5; x++)
 			for(int y = 5; y < size-5; y++)
 				envir[x][y] = 1;
-		for(int x = 500; x < size-5; x++)
-			for(int y = 5; y < size-5; y++)
-				envir[x][y] = 0.4;
+		for(int x = 500; x < 502; x++)
+			for(int y = 0; y < 370; y++)
+				envir[x][y] = 0;
+		for(int x = 500; x < 502; x++)
+			for(int y = 372; y < 377; y++)
+				envir[x][y] = 0;
+		for(int x = 500; x < 502; x++)
+			for(int y = 380; y < size; y++)
+				envir[x][y] = 0;
 		return true;
 	}
 
