@@ -31,6 +31,7 @@ private:
 	double (*dummyU)[size] = (double(*)[size]) malloc(sizeof(double[size][size]));
 	double (*dummyV)[size] = (double(*)[size]) malloc(sizeof(double[size][size]));
 	double (*dummyP)[size] = (double(*)[size]) malloc(sizeof(double[size][size]));
+	double (*envir)[size] = (double(*)[size]) malloc(sizeof(double[size][size]));
 	//double V[size][size] {0};
 	//double rho[size][size] {0};
 	//double dummyU[size][size] {0};
@@ -82,16 +83,16 @@ private:
 
 	void updateVel(){
 		//std::cout << "updateVel\n";
-		for(int x = 0+5; x < size-5; x++){
-			for(int y = 0+5; y < size-5; y++){
+		for(int x = 0; x < size; x++){
+			for(int y = 0; y < size; y++){
 				//std::cout << "x: " << x << ", y: " << y << "\n";
 				double forceX = visconst*(diffSqU(x, y, 0) + diffSqU(x, y, 1)) + rho*wall/*(x - size*0.5)*/  - diffP(x, y, 0);
 				double forceY = visconst*(diffSqV(x, y, 0) + diffSqV(x, y, 1)) + rho*wall/*(y - size*0.5)*/  - diffP(x, y, 1);
 				double conveX = U[x][y]*diffU(x, y, 0) + V[x][y]*diffU(x, y, 1);
 				double conveY = U[x][y]*diffV(x, y, 0) + V[x][y]*diffV(x, y, 1);
 				//std::cout << diffP(x, y, 0) << "\n";
-				dummyU[x][y] = U[x][y] + dt*((forceX/rho) - conveX);
-				dummyV[x][y] = V[x][y] + dt*((forceY/rho) - conveY);
+				dummyU[x][y] = U[x][y] + envir[x][y]*dt*((forceX/rho) - conveX);
+				dummyV[x][y] = V[x][y] + envir[x][y]*dt*((forceY/rho) - conveY);
 			}
 		}
 		maxU = 0;
@@ -141,11 +142,18 @@ public:
 				V[x][y] = 0;
 				dummyV[x][y] = 0;
 				P[x][y] = (double) (rand() % 3);
+				envir[x][y] = 0;
 			}
 		}
 		for(int x = 100; x < size - 500; x++)
 			for(int y = 100; y < size - 500; y++)
-				P[x][y] = rand() % 100;
+				P[x][y] = rand() % 200;
+		for(int x = 5; x < size-5; x++)
+			for(int y = 5; y < size-5; y++)
+				envir[x][y] = 1;
+		for(int x = 500; x < size-5; x++)
+			for(int y = 5; y < size-5; y++)
+				envir[x][y] = 0.4;
 		return true;
 	}
 
