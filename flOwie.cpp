@@ -7,7 +7,7 @@ const int size = 750;
 const float rho = 10;
 const float visconst = 0.001;
 const double wall = -0.0;
-const double dt = 0.02;
+const double dt = 0.04;
 const double artco = 10000;
 
 int m(int a, int b){
@@ -145,7 +145,7 @@ public:
 		}
 		for(int x = 100; x < size - 500; x++)
 			for(int y = 100; y < size - 500; y++)
-				P[x][y] = rand() % 1000;
+				P[x][y] = rand() % 100;
 		return true;
 	}
 
